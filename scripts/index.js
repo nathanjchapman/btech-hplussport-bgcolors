@@ -3,7 +3,7 @@ $("document").ready(function() {
     $("[data-type='mineralwater']").css("background-color", "blue");
     $("[data-type='proteinbar']").css("background-color", "RebeccaPurple");
 
-    // filter
+    // product filter
     document.querySelector("#filter-vitamins").addEventListener("change", function(evnt) {
         updateProductFilter("vitamins", evnt.target.checked);
     });
@@ -31,4 +31,16 @@ $("document").ready(function() {
 
         $(".product-item").has(val).css('display', state ? "" : "none");
     };
+
+
+    // product links
+    $(".product-item").each(function() {
+        let prodName = encodeURIComponent($(this).children("h2").text());
+        console.log(prodName);
+        let prodID = encodeURIComponent($(this).data("prod_id"));
+
+        let link = $("<a href='product.html?prodName=" + prodName + "&prodID=" + prodID + "'/>");
+        $(this).children("img").wrap(link);
+
+    });
 });
